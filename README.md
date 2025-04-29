@@ -16,7 +16,7 @@
 
 `git clone https://github.com/K4shey/excel_processor.git`
 
-`cd` <директория-проекта>
+`cd excel_processor`
 
 ### Сборка проекта
 `mvn clean package`
