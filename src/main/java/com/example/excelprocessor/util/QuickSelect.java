@@ -1,15 +1,30 @@
 package com.example.excelprocessor.util;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
-public class QuickSelect {
+public final class QuickSelect {
+
+    private static final Random random = new Random();
 
     public static int findNthSmallest(List<Integer> numbers, int n) {
 
-        List<Integer> copyList = new ArrayList<>(numbers);
-        return quickSelect(copyList, 0, copyList.size() - 1, n - 1);
+        validateNumbersNotEmpty(numbers);
+
+        if (n < 1 || n > numbers.size()) {
+            throw new IllegalArgumentException("Некорректный порядковый номер N");
+        }
+
+        return quickSelect(numbers, 0, numbers.size() - 1, n - 1);
+    }
+
+    private static void validateNumbersNotEmpty(List<Integer> numbers) {
+
+        if (Objects.isNull(numbers) || numbers.isEmpty()) {
+            throw new IllegalArgumentException("Список не может быть пустым");
+        }
     }
 
     private static int quickSelect(List<Integer> numbers, int from, int to, int n) {
@@ -31,6 +46,8 @@ public class QuickSelect {
 
     private static int partition(List<Integer> list, int from, int to) {
 
+        int pivotIdx = from + random.nextInt(to - from + 1);
+        Collections.swap(list, pivotIdx, to);
         int currIdx = from;
         int pivot = list.get(to);
 

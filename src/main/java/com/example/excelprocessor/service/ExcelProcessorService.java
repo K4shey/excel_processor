@@ -20,10 +20,6 @@ public class ExcelProcessorService {
     public Integer findNthSmallest(MultipartFile file, int n) throws IOException {
 
         List<Integer> numbers = excelReader.readNumbersFromFirstColumn(file);
-
-        if (n < 1 || n > numbers.size()) {
-            throw new IllegalArgumentException("Некорректный порядковый номер N");
-        }
         return QuickSelect.findNthSmallest(numbers, n);
     }
 }
